@@ -10,7 +10,7 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 
 const app = express();
 const PORT = 3000;
-const GROQ_API_KEY =  // Your real key
+ // Your real key
 
 // Middleware
 app.use(express.static(__dirname));
