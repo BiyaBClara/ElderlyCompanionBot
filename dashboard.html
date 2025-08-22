@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elder Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #000000, #434343);
+      color: #fff;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #00ffd5;
+      text-shadow: 0 0 10px #00ffd5;
+    }
+    table {
+      width: 90%;
+      margin: 30px auto;
+      border-collapse: collapse;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+    th, td {
+      border: 1px solid #00ffd5;
+      padding: 14px 20px;
+      text-align: center;
+    }
+    th {
+      background: #00ffd5;
+      color: #000;
+    }
+    tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>📋 Registered Elders</h1>
+  <table id="elderTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Medical</th>
+        <th>Contact</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function loadData() {
+      const res = await fetch('/get-users');
+      const users = await res.json();
+      const tbody = document.querySelector('#elderTable tbody');
+      tbody.innerHTML = '';
+      users.forEach(user => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${user.name}</td>
+            <td>${user.age}</td>
+            <td>${user.medical}</td>
+            <td>${user.contact}</td>
+          </tr>`;
+      });
+    }
+    loadData();
+  </script>
+</body>
+</html>
